@@ -1,6 +1,25 @@
+# Modifying Nested Resources
+
 ## Objectives
 
-1. Create the required controller actions for edit/update/new/create under nested resources
+1. Understand how to handle modifications (create/update) of nested
+   resources.
+
+## Lesson
+
+Continuing with our blog application, we're going to extend our nested
+resources to allow for creating and modifying blog posts by author.
+
+### Creating New Post For An Author
+
+
+### Editing Post For Author
+
+
+### Handling Errors And Mischief
+
+## Summary
+
 
 ## Overview
 
