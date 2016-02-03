@@ -151,7 +151,7 @@ edit the post for the author.
 ```erb
 # posts\show.html.erb
 <h1><%= @post.title %></h1>
-<p>by <%= link_to @post.author.name, author_path(@post.author) if @post.author %> (<%= link_to "Edit Post", edit_author_post_path(@author, @post) %>)</p>
+<p>by <%= link_to @post.author.name, author_path(@post.author) if @post.author %> (<%= link_to "Edit Post", edit_author_post_path(@post.author, @post) %>)</p>
 <p><%= @post.description %> </p>
 ```
 
@@ -324,3 +324,5 @@ to handle for nested and non-nested versions of the resource.
 You're well on your way to becoming a nested resource ninja!
 
 ![Ninja Baby](http://i.giphy.com/ErdfMetILIMko.gif)
+
+<p data-visibility='hidden'>View <a href='https://learn.co/lessons/modification-nested-routes-reading'>Modifying Nested Resources</a> on Learn.co and start learning to code for free.</p>
