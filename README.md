@@ -280,7 +280,7 @@ list of authors when none is present.
 ```
 
 Okay, that gives us a select control if we don't have an author, but we
-have a problem. We can only hae one `:author_id` field. We can put that
+have a problem. We can only have one `:author_id` field. We can put that
 `hidden_field` in an `else` and that will work, but now we have a whole
 bunch of logic cluttering up our view. So let's dump it in our
 `posts_helper` and clean up that form.
@@ -324,3 +324,5 @@ to handle for nested and non-nested versions of the resource.
 You're well on your way to becoming a nested resource ninja!
 
 ![Ninja Baby](http://i.giphy.com/ErdfMetILIMko.gif)
+
+<p data-visibility='hidden'>View <a href='https://learn.co/lessons/modification-nested-routes-reading'>Modifying Nested Resources</a> on Learn.co and start learning to code for free.</p>
