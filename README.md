@@ -151,7 +151,7 @@ edit the post for the author.
 ```erb
 # posts\show.html.erb
 <h1><%= @post.title %></h1>
-<p>by <%= link_to @post.author.name, author_path(@post.author) if @post.author %> (<%= link_to "Edit Post", edit_author_post_path(@author, @post) %>)</p>
+<p>by <%= link_to @post.author.name, author_path(@post.author) if @post.author %> (<%= link_to "Edit Post", edit_author_post_path(@post.author, @post) %>)</p>
 <p><%= @post.description %> </p>
 ```
 
