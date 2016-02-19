@@ -22,7 +22,7 @@ start with the route. We want to add `:new` to our nested `:posts`
 resource:
 
 ```ruby
-# config\routes.rb
+# config/routes.rb
 
   resources :authors, only: [:show, :index] do
     resources :posts, only: [:show, :index, :new]
@@ -39,7 +39,7 @@ We have the route, so now we need to update our `posts_controller#new`
 action to handle for the `:author_id` parameter.
 
 ```ruby
-# controllers\posts_controller.rb
+# controllers/posts_controller.rb
 
   def new
     @post = Post.new(author_id: params[:author_id])
@@ -52,7 +52,7 @@ Now let's get into our author `show` template and add a link to the
 nested new post page for that author.
 
 ```erb
-# authors\show.html.erb
+# authors/show.html.erb
 <h1><%= @author.name %></h1>
 
 <%= link_to "New Post", new_author_post_path(@author) %>
@@ -74,7 +74,7 @@ server. Let's fix that. Open up the post form partial and add a hidden field
 for the `:author_id`.
 
 ```erb
-# posts\_form.html.erb
+# posts/_form.html.erb
 
 <%= form_for(@post) do |f| %>
   <label>Post title:</label><br>
@@ -101,7 +101,7 @@ us even further.
 Remember [Strong Parameters](http://guides.rubyonrails.org/action_controller_overview.html#strong-parameters)? We need to update our `posts_controller` to accept `:author_id` as a parameter for a post. So let's get in there and modify our `post_params` method.
 
 ```ruby
-# controllers\posts_controller.rb
+# controllers/posts_controller.rb
 
 # ...
 private
@@ -120,10 +120,8 @@ should see the author's name in the byline now!
 Why didn't we have to make a nested resource route for `:create` as well
 as `:new`? 
 
-The `form_for(@post)` helper in `posts\_form.html.erb` will
-automatically route to `POST posts_controller#create` for a new `Post`. By carrying the
-`author_id` as we did and allowing it through strong parameters, the
-existing `create` route and action can be used without needing to do
+The `form_for(@post)` helper in `posts/_form.html.erb` will
+automatically route to `POST posts_controller#create` for a new `Post`. By carrying the `author_id` as we did and allowing it through strong parameters, the existing `create` route and action can be used without needing to do
 anything else.
 
 ### Editing An Author's Posts
@@ -134,7 +132,7 @@ posts.
 First, we allow the `:edit` action in the nested route:
 
 ```ruby
-# config\routes.rb
+# config/routes.rb
 
   resources :authors, only: [:show, :index] do
     resources :posts, only: [:show, :index, :new, :edit]
@@ -149,7 +147,7 @@ Now we need to update our post `show` view to give us the new nested link to
 edit the post for the author.
 
 ```erb
-# posts\show.html.erb
+# posts/show.html.erb
 <h1><%= @post.title %></h1>
 <p>by <%= link_to @post.author.name, author_path(@post.author) if @post.author %> (<%= link_to "Edit Post", edit_author_post_path(@post.author, @post) %>)</p>
 <p><%= @post.description %> </p>
@@ -184,7 +182,7 @@ taking shortcuts. What we should do is check to make sure that 1) the
 that now.
 
 ```ruby
-# controllers\posts_controller.rb
+# controllers/posts_controller.rb
 
   # ...
   def edit
@@ -224,7 +222,7 @@ we're creating a new post for a valid author. Let's make it look like
 this:
 
 ```ruby
-# controllers\posts_controller.rb
+# controllers/posts_controller.rb
 
   def new
     if params[:author_id] && !Author.exists?(params[:author_id])
@@ -264,11 +262,11 @@ But we've decided we want to be able to select an author at time of
 posting if we haven't used the nested route.
 
 Since we're already set up to handle `author_id` on the controller, all
-we have to do is augment our `posts\_form.html.erb` partial to present a
+we have to do is augment our `posts/_form.html.erb` partial to present a
 list of authors when none is present.
 
 ```erb
-# posts\_form.html.erb
+# posts/_form.html.erb
 
 <%= form_for(@post) do |f| %>
   <label>Post title:</label><br>
@@ -286,7 +284,7 @@ bunch of logic cluttering up our view. So let's dump it in our
 `posts_helper` and clean up that form.
 
 ```ruby
-# helpers\posts_helper.rb
+# helpers/posts_helper.rb
 
 module PostsHelper
   def author_id_field(post)
@@ -302,7 +300,7 @@ end
 And back in our form partial:
 
 ```erb
-# posts\_form.html.erb
+# posts_form.html.erb
 
 <%= form_for(@post) do |f| %>
   <%= author_id_field(@post) %>
