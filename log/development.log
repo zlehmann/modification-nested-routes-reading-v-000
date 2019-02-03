@@ -3974,3 +3974,4 @@ Processing by PostsController#new as HTML
   Parameters: {"author_id"=>"4"}
   Rendered posts/_form.html.erb (1.7ms)
   Rendered posts/new.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 30ms (Views: 19.3ms | ActiveRecord: 0.7ms)
